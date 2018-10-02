@@ -42,12 +42,12 @@ public class TopicController {
 	}
 	
 	@PutMapping("/topics/{name}")
-	public String updateTopic(@PathVariable String name,@RequestBody Topic topic) {
-		return topicService.updateTopic(name,topic);
+	public void updateTopic(@PathVariable String name,@RequestBody Topic topic) {
+		topicService.updateTopic(topic);
 	}
 	
 	@DeleteMapping("/topics/{name}")
-	public String deleteTopic(@PathVariable String name) {
-		return topicService.deleteTopic(name);
+	public void deleteTopic(@PathVariable String name) {
+		topicService.deleteTopic(name);
 	}
 }

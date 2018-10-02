@@ -3,41 +3,38 @@ package com.boot.myspringbootdata.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.boot.myspringbootdata.model.Topic;
+import com.boot.myspringbootdata.repository.TopicRepository;
 
 @Service
 public class TopicService {
-	List<Topic> allTopics = new ArrayList<Topic>();
 	
-	public TopicService() {
-		System.out.println("Inside TopicService Cons");
-		allTopics.add(new Topic("topic1","desc1"));
-		allTopics.add(new Topic("topic2","desc2"));
-	}
+	@Autowired
+	private TopicRepository topicRepository;
 	
 	public List<Topic> getAllTopics(){
-		return allTopics;
+		List<Topic> topics = new ArrayList<>();
+		topicRepository.findAll().forEach(topics::add);			//Java 8 Method Reference
+		//or topicRepository.findAll().forEach(topic -> topics.add(topic));		//Lambda Expression
+		return topics;
 	}
 
 	public Topic getTopic(String name) {
-		return allTopics.stream().filter(t -> t.getName().equals(name)).findFirst().get();
+		return topicRepository.findById(name).get();
 	}
 
 	public void addTopic(Topic topic) {
-		allTopics.add(new Topic(topic.getName(),topic.getDesc()));		
+		topicRepository.save(topic);
 	}
 
-	public String updateTopic(String name,Topic newTopic) {
-		Topic oldTopic = allTopics.stream().filter(t -> t.getName().equals(name)).findFirst().get();
-		oldTopic.setDesc(newTopic.getDesc());
-		
-		return "Updated Successfully";
+	public void updateTopic(Topic newTopic) {
+		topicRepository.save(newTopic);
 	}
 
-	public String deleteTopic(String name) {
-		allTopics.removeIf(t -> t.getName().equals(name));
-		return "Delete Successful";
+	public void deleteTopic(String name) {
+		topicRepository.deleteById(name);
 	}
 }
