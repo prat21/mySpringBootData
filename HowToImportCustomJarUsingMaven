@@ -1,0 +1,21 @@
+How did I imported my custom jar "test-1.0.0-SNAPSHOT.jar" in maven dependencies?
+
+1. Put the customer jar in some location, say in desktop
+2. Run the following maven command from commandline (the location from where you run the command does not matter),
+
+	mvn install:install-file -Dfile=C:\Users\pratik\Desktop\test.jar -DgroupId=com.java -DartifactId=test -Dversion=1.0.0-SNAPSHOT -Dpackaging=jar
+	
+This command will install the your jar in the local repo (C:\Users\pratik\.m2\repository) under the folder hierarchy:
+
+	com\java\test\1.0.0-SNAPSHOT
+	
+The folder hierarchy is taken as {groupId}\{artifactId}\{version}
+
+3. To use the jar in some project, put the following entry in pom.xml and build the project:
+		<dependency>
+			<groupId>com.java</groupId>
+			<artifactId>test</artifactId>
+			<version>1.0.0-SNAPSHOT</version>		
+		</dependency>
+The jar will be imported in maven dependencies. Note that you can always get the pom dependency entry from the pom.xml present in the
+C:\Users\pratik\.m2\repository\com\java\test\1.0.0-SNAPSHOT folder.
