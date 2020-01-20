@@ -1,13 +1,6 @@
 package com.boot.myspringbootdata.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="BOOK_TAB")
@@ -16,10 +9,18 @@ public class Book {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String name;
+
+	/*
+		Here only unidirectional OneToMany is implemented (ie there is no reference of Topic from the Book class).
+		In case of bi-directional OneToMany, there is the problem of eager fetching
+		(ie topic fetches book, book fetches topic and this goes on putting the process in infinite loop)
+		Visit the link for more info.
+		https://medium.com/monstar-lab-bangladesh-engineering/jpa-hibernate-bidirectional-lazy-loading-done-right-65eda6426d64
+	 */
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="topic_id")
-	private Topic topic;
+	/*@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="topic_id_prat")
+	private Topic topic;*/
 	
 	
 	public Integer getId() {
@@ -33,12 +34,6 @@ public class Book {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Topic getTopic() {
-		return topic;
-	}
-	public void setTopic(Topic topic) {
-		this.topic = topic;
 	}
 	
 	

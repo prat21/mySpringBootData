@@ -1,28 +1,28 @@
 package com.boot.myspringbootdata.model;
 
 public class ExceptionModel {
-	private String messsage;
+	private String message;
 	private String url;
 	
 	public ExceptionModel() {
 		
 	}
 	
-	public ExceptionModel(String messsage, String url) {
-		this.messsage = messsage;
+	public ExceptionModel(String message, String url) {
+		this.message = message;
 		this.url = url;
 	}
 
-	public String getMesssage() {
-		return messsage;
+	public String getMessage() {
+		return message;
 	}
 	
 	public String getUrl() {
 		return url;
 	}
 	
-	public void setMesssage(String messsage) {
-		this.messsage = messsage;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 	public void setUrl(String url) {

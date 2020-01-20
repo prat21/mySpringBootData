@@ -32,13 +32,13 @@ public class TopicController {
 		
 	@GetMapping("/topics")
 	public List<Topic> getTopics(){
-		return topicService.getAllTopics();
+		 return topicService.getAllTopics();
 	}
 	
 	
 	/*
 	 * An Exception has been mapped for this URL. Try the URL "http://localhost:8080/topics/1" and see what happens.
-	 * Also see the ExcpetionHandler at TopicControllerAdvice.
+	 * Also see the ExceptionHandler at TopicControllerAdvice.
 	 */
 	@GetMapping("/topics/{name}")
 	public Topic getTopic(@PathVariable Integer name) {
@@ -51,14 +51,6 @@ public class TopicController {
 	@GetMapping("/topics/desc/{desc}")
 	public List<Topic> getTopicUsingDesc(@PathVariable String desc) {
 		return topicService.findMyTopicUsingDesc(desc);
-	}
-	
-	/*
-	 * Delete these method later
-	 */
-	@GetMapping("/topics/test/{desc}")
-	public List<Topic> Test(@PathVariable String desc) {
-		return t.Test(desc);
 	}
 	
 	/* This method adds a new book to the given topicid*/
@@ -88,13 +80,8 @@ public class TopicController {
 		b.save(book);
 	}
 	
-	/*
-	 * Delete these method later - end
-	 */
-	
 	@PostMapping("/topics")
 	public void addTopic(@RequestBody Topic topic) {
-		//System.out.println(topic.getBooks());
 		topicService.addTopic(topic);
 	}
 	

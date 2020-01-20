@@ -1,44 +1,42 @@
 package com.boot.myspringbootdata.model;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 @Table(name="TOPIC_TAB")
 public class Topic {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
 	private String name;
 	private String desc;
-	
-	/*@OneToMany(cascade=CascadeType.ALL)
-	private List<Book> books;*/
-	
-	/*public List<Book> getBooks() {
+
+	/*
+		Here only unidirectional OneToMany is implemented (ie there is no reference of Topic from the Book class).
+		In case of bi-directional OneToMany, there is the problem of eager fetching
+		(ie topic fetches book, book fetches topic and this goes on putting the process in infinite loop)
+		Visit the link for more info.
+		https://medium.com/monstar-lab-bangladesh-engineering/jpa-hibernate-bidirectional-lazy-loading-done-right-65eda6426d64
+	 */
+	//@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "topic_id")
+	private List<Book> books = new ArrayList<>();
+
+	public List<Book> getBooks() {
 		return books;
 	}
 
-
 	public void setBooks(List<Book> books) {
 		this.books = books;
-	}*/
+	}
 
 
 	public Topic() {
 		// Required for Marshalling and Unmarshalling
-	}
-	
-	
-	public Topic(String name, String desc) {
-		this.name = name;
-		this.desc = desc;
 	}
 
 
