@@ -1,5 +1,9 @@
 package com.boot.myspringbootdata.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name="TOPIC_TAB")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Topic {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -26,7 +33,10 @@ public class Topic {
 	@JoinColumn(name = "topic_id")
 	private List<Book> books = new ArrayList<>();
 
-	public List<Book> getBooks() {
+	/*
+		Removed the hardcoded getter, setters and constructors with lombok annotations
+	 */
+	/*public List<Book> getBooks() {
 		return books;
 	}
 
@@ -57,7 +67,7 @@ public class Topic {
 	}
 	public void setDesc(String desc) {
 		this.desc = desc;
-	}
+	}*/
 	
 	
 }

@@ -1,9 +1,16 @@
 package com.boot.myspringbootdata.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="BOOK_TAB")
+@Getter
+@Setter
+@ToString
 public class Book {
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
@@ -22,8 +29,10 @@ public class Book {
 	@JoinColumn(name="topic_id_prat")
 	private Topic topic;*/
 	
-	
-	public Integer getId() {
+	/*
+		Removed the hardcoded getter, setters and constructors with lombok annotations
+	 */
+	/*public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
@@ -34,12 +43,12 @@ public class Book {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
+	}*/
 	
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return "id: "+id+" name: "+name;
-	}
+	}*/
 	
 }

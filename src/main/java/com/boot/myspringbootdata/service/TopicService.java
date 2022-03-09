@@ -26,8 +26,8 @@ public class TopicService {
 		return topics;
 	}
 
-	public Topic getTopic(Integer name) {
-		return topicRepository.findById(name).get();
+	public Topic getTopic(Integer id) {
+		return topicRepository.findById(id).get();
 	}
 
 	public void addTopic(Topic topic) {

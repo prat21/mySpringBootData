@@ -40,9 +40,9 @@ public class TopicController {
 	 * An Exception has been mapped for this URL. Try the URL "http://localhost:8080/topics/1" and see what happens.
 	 * Also see the ExceptionHandler at TopicControllerAdvice.
 	 */
-	@GetMapping("/topics/{name}")
-	public Topic getTopic(@PathVariable Integer name) {
-		return topicService.getTopic(name);
+	@GetMapping("/topics/{id}")
+	public Topic getTopic(@PathVariable Integer id) {
+		return topicService.getTopic(id);
 	}
 	
 	/*
@@ -56,7 +56,7 @@ public class TopicController {
 	/* This method adds a new book to the given topicid*/
 	@PostMapping("/topicAddBook/{topicID}")
 	public void topicAddNewBook(@RequestBody Book newBook, @PathVariable Integer topicID) {
-		System.out.println(newBook.getName());
+		System.out.println("newBook:"+newBook);
 		topicService.topicAddNewBook(topicID,newBook);
 	}
 	
